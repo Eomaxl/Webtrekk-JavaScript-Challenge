@@ -692,7 +692,7 @@ let UserDetailsComponent = class UserDetailsComponent {
     }
     ngOnInit() {
         this.activatedRoute.params.subscribe((params) => {
-            this.userService.getUserByIdViaRest(+params[`id`]).subscribe(user => this.user = [{ "name": { "firstName": user.name.firstName, "lastName": user.name.lastName }, "_id": user.id, "customerID": user.customerID, "birthday": user.birthday, "gender": user.gender, "lastContact": user.lastContact, "customerLifetimeValue": user.customerLifetimeValue, "__v": user.v }], err => console.log('Got an error while fetching the user details: ', err));
+            this.userService.getUserByIdViaRest(+params[`id`]).subscribe(user => this.user = user, err => console.log('Got an error while fetching the user details: ', err));
         });
         console.log(JSON.stringify(this.user));
     }
@@ -842,8 +842,10 @@ let UserService = class UserService {
     constructor(http) {
         this.http = http;
         //private _rootUrl:string  = 'https://jsonplaceholder.typicode.com/users';
-        this._rootUrl = "http://localhost:3000/users";
+        //private _rootUrl:string ="http://localhost:3000/users";
+        this._rootUrl = "https://webtrekk-frontend.herokuapp.com/users";
     }
+    //Fetching all the users
     getUsersViaRest() {
         return this.http.get(this._rootUrl, {});
     }

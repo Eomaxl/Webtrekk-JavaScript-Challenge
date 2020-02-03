@@ -714,7 +714,7 @@ var UserDetailsComponent = /** @class */ (function () {
     UserDetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activatedRoute.params.subscribe(function (params) {
-            _this.userService.getUserByIdViaRest(+params["id"]).subscribe(function (user) { return _this.user = [{ "name": { "firstName": user.name.firstName, "lastName": user.name.lastName }, "_id": user.id, "customerID": user.customerID, "birthday": user.birthday, "gender": user.gender, "lastContact": user.lastContact, "customerLifetimeValue": user.customerLifetimeValue, "__v": user.v }]; }, function (err) { return console.log('Got an error while fetching the user details: ', err); });
+            _this.userService.getUserByIdViaRest(+params["id"]).subscribe(function (user) { return _this.user = user; }, function (err) { return console.log('Got an error while fetching the user details: ', err); });
         });
         console.log(JSON.stringify(this.user));
     };
@@ -870,8 +870,10 @@ var UserService = /** @class */ (function () {
     function UserService(http) {
         this.http = http;
         //private _rootUrl:string  = 'https://jsonplaceholder.typicode.com/users';
-        this._rootUrl = "http://localhost:3000/users";
+        //private _rootUrl:string ="http://localhost:3000/users";
+        this._rootUrl = "https://webtrekk-frontend.herokuapp.com/users";
     }
+    //Fetching all the users
     UserService.prototype.getUsersViaRest = function () {
         return this.http.get(this._rootUrl, {});
     };
