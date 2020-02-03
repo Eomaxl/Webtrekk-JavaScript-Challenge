@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-app.listen(port,()=>{
-    console.log('Server is up on the port '+ port)
+app.listen(process.env.PORT,()=>{
+    var Port = server.address().port;
+    console.log('Server is up on the port '+ Port);
 })
